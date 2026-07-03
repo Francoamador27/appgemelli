@@ -25,6 +25,11 @@ export const translations = {
     passwordLabel: { es: "Contraseña", it: "Password" },
     loginButton: { es: "Ingresar", it: "Accedi" },
     loggingIn: { es: "Ingresando...", it: "Accesso in corso..." },
+    installApp: { es: "⬇ Descargar app", it: "⬇ Scarica app" },
+    installIosHint: {
+      es: "Tocá el ícono Compartir de Safari y elegí \"Agregar a inicio\".",
+      it: "Tocca l'icona Condividi di Safari e scegli \"Aggiungi a Home\".",
+    },
   },
   nav: {
     calendar: { es: "Calendario", it: "Calendario" },

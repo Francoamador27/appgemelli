@@ -9,6 +9,7 @@ import { useLocale } from "@/lib/i18n/LocaleContext";
 import Button from "@/components/ui/Button";
 import Field from "@/components/ui/Field";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
+import InstallAppButton from "@/components/pwa/InstallAppButton";
 import { inputClass } from "@/components/ui/input-styles";
 
 export default function LoginPage() {
@@ -49,6 +50,10 @@ export default function LoginPage() {
             {t.auth.appName}
           </h1>
           <p className="text-sm text-zinc-500">{t.auth.subtitle}</p>
+        </div>
+
+        <div className="mb-6 flex justify-center">
+          <InstallAppButton />
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
