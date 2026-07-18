@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import api from "@/lib/api";
 import { getErrorMessage } from "@/lib/errors";
 import { useLocale } from "@/lib/i18n/LocaleContext";
+import { buildResourceMessage } from "@/lib/resourceMessage";
 import Sheet from "@/components/ui/Sheet";
 import type { Resource } from "@/types/resource";
 
@@ -12,26 +13,6 @@ const TYPE_ICON: Record<Resource["type"], string> = {
   image: "🖼️",
   file: "📄",
 };
-
-const SEPARATOR = "\n\n---\n\n";
-
-function buildMessage(resource: Resource): string {
-  const blocks: string[] = [];
-
-  if (resource.title_en) {
-    const en = [`*EN* - *${resource.title_en}*`];
-    if (resource.description_en) en.push(resource.description_en);
-    blocks.push(en.join("\n"));
-  }
-
-  const it = [`*IT* - *${resource.title_it}*`];
-  if (resource.description_it) it.push(resource.description_it);
-  blocks.push(it.join("\n"));
-
-  blocks.push(resource.type === "link" ? resource.url! : resource.file_url!);
-
-  return blocks.join(SEPARATOR);
-}
 
 export default function ResourceSendSheet({
   bookingId,
@@ -67,7 +48,7 @@ export default function ResourceSendSheet({
 
   async function handleSend(resource: Resource) {
     const digits = phone.replace(/\D/g, "");
-    const text = encodeURIComponent(buildMessage(resource));
+    const text = encodeURIComponent(buildResourceMessage(resource));
     window.open(`https://wa.me/${digits}?text=${text}`, "_blank");
 
     try {

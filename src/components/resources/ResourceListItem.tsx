@@ -3,6 +3,8 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useLocale } from "@/lib/i18n/LocaleContext";
+import { toWaShareLink } from "@/lib/resourceMessage";
+import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 import type { Resource } from "@/types/resource";
 
 const TYPE_ICON: Record<Resource["type"], string> = {
@@ -59,6 +61,15 @@ export default function ResourceListItem({
       </div>
 
       <div className="flex shrink-0 gap-1">
+        <a
+          href={toWaShareLink(resource)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-lg p-2 text-emerald-600 active:bg-emerald-50"
+          aria-label={t.resource.shareWhatsapp}
+        >
+          <WhatsAppIcon className="h-5 w-5" />
+        </a>
         <button
           onClick={onEdit}
           className="rounded-lg p-2 text-zinc-500 active:bg-zinc-100"

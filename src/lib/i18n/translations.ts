@@ -116,6 +116,7 @@ export const translations = {
       it: "Capacità (persone)",
     },
     photoLabel: { es: "Foto (opcional)", it: "Foto (opzionale)" },
+    shareImage: { es: "Compartir imagen", it: "Condividi immagine" },
     people: { es: "personas", it: "persone" },
     fleetTitle: { es: "Flota", it: "Flotta" },
     deleteConfirm: {
@@ -152,6 +153,8 @@ export const translations = {
       it: "File (lascia vuoto per mantenere quello attuale)",
     },
     empty: { es: "No hay recursos cargados.", it: "Nessuna risorsa caricata." },
+    reorderHandle: { es: "Arrastrar para reordenar", it: "Trascina per riordinare" },
+    shareWhatsapp: { es: "Compartir por WhatsApp", it: "Condividi su WhatsApp" },
     deleteConfirm: {
       es: '¿Eliminar el recurso "{name}"?',
       it: 'Eliminare la risorsa "{name}"?',

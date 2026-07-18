@@ -1,6 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {
+  DndContext,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  arrayMove,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import api from "@/lib/api";
 import { getErrorMessage, isNotFoundError } from "@/lib/errors";
 import { useLocale } from "@/lib/i18n/LocaleContext";
@@ -21,6 +34,9 @@ export default function RecursosPage() {
   const [showForm, setShowForm] = useState(false);
   const [deletingResource, setDeletingResource] = useState<Resource | null>(
     null,
+  );
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
   );
 
   async function loadResources() {
@@ -71,6 +87,27 @@ export default function RecursosPage() {
     loadResources();
   }
 
+  async function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = resources.findIndex((r) => r.id === active.id);
+    const newIndex = resources.findIndex((r) => r.id === over.id);
+    if (oldIndex === -1 || newIndex === -1) return;
+
+    const reordered = arrayMove(resources, oldIndex, newIndex);
+    setResources(reordered);
+
+    try {
+      await api.post("/resources/reorder", {
+        ids: reordered.map((r) => r.id),
+      });
+    } catch (err) {
+      setError(getErrorMessage(err));
+      loadResources();
+    }
+  }
+
   return (
     <div className="px-4 py-4">
       <div className="mb-4 flex items-center justify-between">
@@ -89,16 +126,27 @@ export default function RecursosPage() {
           {t.resource.empty}
         </p>
       ) : (
-        <div className="flex flex-col gap-2">
-          {resources.map((resource) => (
-            <ResourceListItem
-              key={resource.id}
-              resource={resource}
-              onEdit={() => openEdit(resource)}
-              onDelete={() => setDeletingResource(resource)}
-            />
-          ))}
-        </div>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext
+            items={resources.map((r) => r.id)}
+            strategy={verticalListSortingStrategy}
+          >
+            <div className="flex flex-col gap-2">
+              {resources.map((resource) => (
+                <ResourceListItem
+                  key={resource.id}
+                  resource={resource}
+                  onEdit={() => openEdit(resource)}
+                  onDelete={() => setDeletingResource(resource)}
+                />
+              ))}
+            </div>
+          </SortableContext>
+        </DndContext>
       )}
 
       {showForm && (
