@@ -34,6 +34,7 @@ export const translations = {
   nav: {
     calendar: { es: "Calendario", it: "Calendario" },
     boats: { es: "Barcas", it: "Barche" },
+    resources: { es: "Recursos", it: "Risorse" },
     logout: { es: "Salir", it: "Esci" },
   },
   calendar: {
@@ -91,6 +92,8 @@ export const translations = {
     },
     call: { es: "Llamar", it: "Chiama" },
     whatsapp: { es: "WhatsApp", it: "WhatsApp" },
+    sendResource: { es: "Recursos", it: "Risorse" },
+    sentResources: { es: "Ya enviado", it: "Già inviato" },
     channels: {
       directo: { es: "Directo", it: "Diretto" },
       samboat: { es: "SamBoat", it: "SamBoat" },
@@ -118,6 +121,45 @@ export const translations = {
     deleteConfirm: {
       es: '¿Eliminar la barca "{name}"? Esto también elimina sus reservas asociadas.',
       it: 'Eliminare la barca "{name}"? Questo elimina anche le prenotazioni associate.',
+    },
+  },
+  resource: {
+    menuTitle: { es: "Recursos", it: "Risorse" },
+    add: { es: "+ Agregar", it: "+ Aggiungi" },
+    newTitle: { es: "Nuevo recurso", it: "Nuova risorsa" },
+    editTitle: { es: "Editar recurso", it: "Modifica risorsa" },
+    typeLabel: { es: "Tipo", it: "Tipo" },
+    typeLink: { es: "Link", it: "Link" },
+    typeImage: { es: "Imagen", it: "Immagine" },
+    typeFile: { es: "Archivo", it: "File" },
+    titleEnLabel: {
+      es: "Título (inglés, opcional)",
+      it: "Titolo (inglese, opzionale)",
+    },
+    titleItLabel: { es: "Título (italiano)", it: "Titolo (italiano)" },
+    descriptionEnLabel: {
+      es: "Descripción (inglés, opcional)",
+      it: "Descrizione (inglese, opzionale)",
+    },
+    descriptionItLabel: {
+      es: "Descripción (italiano, opcional)",
+      it: "Descrizione (italiano, opzionale)",
+    },
+    urlLabel: { es: "Link", it: "Link" },
+    fileLabel: { es: "Archivo", it: "File" },
+    fileLabelOptional: {
+      es: "Archivo (dejar vacío para mantener el actual)",
+      it: "File (lascia vuoto per mantenere quello attuale)",
+    },
+    empty: { es: "No hay recursos cargados.", it: "Nessuna risorsa caricata." },
+    deleteConfirm: {
+      es: '¿Eliminar el recurso "{name}"?',
+      it: 'Eliminare la risorsa "{name}"?',
+    },
+    sendSheetTitle: { es: "Enviar recurso", it: "Invia risorsa" },
+    sendEmpty: {
+      es: "No hay recursos para enviar.",
+      it: "Nessuna risorsa da inviare.",
     },
   },
   errors: {

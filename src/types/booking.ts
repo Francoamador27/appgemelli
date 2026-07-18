@@ -9,6 +9,14 @@ export const BOOKING_CHANNEL_VALUES: BookingChannel[] = [
   "otro",
 ];
 
+export interface ResourceSend {
+  id: number;
+  resource_id: number | null;
+  title_en: string | null;
+  title_it: string;
+  sent_at: string;
+}
+
 export interface Booking {
   id: number;
   boat_id: number;
@@ -22,6 +30,7 @@ export interface Booking {
   is_paid: boolean;
   amount_due: string | null;
   notes: string | null;
+  resource_sends: ResourceSend[];
   created_at: string;
   updated_at: string;
 }

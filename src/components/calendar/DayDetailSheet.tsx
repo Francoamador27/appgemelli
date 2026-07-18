@@ -94,6 +94,7 @@ export default function DayDetailSheet({
                 booking={booking}
                 onEdit={() => openEdit(booking)}
                 onDelete={() => setDeletingBooking(booking)}
+                onChanged={onChanged}
               />
             ))}
           </div>

@@ -1,7 +1,13 @@
 "use client";
 
+import { useState } from "react";
+import { formatDistanceToNow } from "date-fns";
+import { es, it } from "date-fns/locale";
 import { useLocale } from "@/lib/i18n/LocaleContext";
+import ResourceSendSheet from "@/components/resources/ResourceSendSheet";
 import type { Booking } from "@/types/booking";
+
+const DATE_FNS_LOCALES = { es, it };
 
 function toWaLink(phone: string): string {
   const digits = phone.replace(/\D/g, "");
@@ -12,12 +18,15 @@ export default function BookingListItem({
   booking,
   onEdit,
   onDelete,
+  onChanged,
 }: {
   booking: Booking;
   onEdit: () => void;
   onDelete: () => void;
+  onChanged: () => void;
 }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
+  const [showResources, setShowResources] = useState(false);
   const channelLabel = booking.channel
     ? t.booking.channels[booking.channel]
     : null;
@@ -36,6 +45,11 @@ export default function BookingListItem({
           <p className="truncate text-sm text-zinc-600">
             {booking.client_name || t.booking.noClientName}
           </p>
+          {booking.client_phone && (
+            <p className="truncate text-xs text-zinc-400">
+              {booking.client_phone}
+            </p>
+          )}
         </div>
         <div className="flex shrink-0 gap-1">
           <button
@@ -86,22 +100,58 @@ export default function BookingListItem({
       </div>
 
       {booking.client_phone && (
-        <div className="mt-3 flex gap-2">
-          <a
-            href={`tel:${booking.client_phone}`}
-            className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-zinc-100 py-2 text-sm font-medium text-zinc-700 active:bg-zinc-200"
+        <div className="mt-3 flex flex-col gap-2">
+          <div className="flex gap-2">
+            <a
+              href={`tel:${booking.client_phone}`}
+              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-zinc-100 py-2 text-sm font-medium text-zinc-700 active:bg-zinc-200"
+            >
+              📞 {t.booking.call}
+            </a>
+            <a
+              href={toWaLink(booking.client_phone)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-emerald-100 py-2 text-sm font-medium text-emerald-700 active:bg-emerald-200"
+            >
+              💬 {t.booking.whatsapp}
+            </a>
+          </div>
+          <button
+            onClick={() => setShowResources(true)}
+            className="flex w-full items-center justify-center gap-1.5 rounded-lg bg-brand-light py-2 text-sm font-medium text-brand active:bg-brand-light/70"
           >
-            📞 {t.booking.call}
-          </a>
-          <a
-            href={toWaLink(booking.client_phone)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-emerald-100 py-2 text-sm font-medium text-emerald-700 active:bg-emerald-200"
-          >
-            💬 {t.booking.whatsapp}
-          </a>
+            📎 {t.booking.sendResource}
+          </button>
         </div>
+      )}
+
+      {booking.resource_sends.length > 0 && (
+        <div className="mt-3 border-t border-zinc-100 pt-2">
+          <p className="text-xs font-medium text-zinc-400">
+            {t.booking.sentResources}
+          </p>
+          <ul className="mt-1 flex flex-col gap-0.5">
+            {booking.resource_sends.map((send) => (
+              <li key={send.id} className="truncate text-xs text-zinc-500">
+                ✓ {send.title_it} ·{" "}
+                {formatDistanceToNow(new Date(send.sent_at), {
+                  addSuffix: true,
+                  locale: DATE_FNS_LOCALES[locale],
+                })}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {showResources && booking.client_phone && (
+        <ResourceSendSheet
+          bookingId={booking.id}
+          phone={booking.client_phone}
+          onClose={() => setShowResources(false)}
+          onSent={onChanged}
+        />
       )}
     </div>
   );

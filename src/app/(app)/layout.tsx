@@ -21,6 +21,7 @@ export default function AppLayout({
   const navItems = [
     { href: "/calendario", label: t.nav.calendar, icon: "📅" },
     { href: "/barcas", label: t.nav.boats, icon: "🚤" },
+    { href: "/recursos", label: t.nav.resources, icon: "📎" },
   ];
 
   useEffect(() => {
