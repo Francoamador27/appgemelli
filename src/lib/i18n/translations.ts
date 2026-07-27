@@ -94,6 +94,8 @@ export const translations = {
     whatsapp: { es: "WhatsApp", it: "WhatsApp" },
     sendResource: { es: "Recursos", it: "Risorse" },
     sentResources: { es: "Ya enviado", it: "Già inviato" },
+    requestPhotos: { es: "📸 Pedir fotos", it: "📸 Richiedi foto" },
+    viewPhotos: { es: "🖼️ Ver fotos", it: "🖼️ Vedi foto" },
     channels: {
       directo: { es: "Directo", it: "Diretto" },
       samboat: { es: "SamBoat", it: "SamBoat" },
@@ -163,6 +165,81 @@ export const translations = {
     sendEmpty: {
       es: "No hay recursos para enviar.",
       it: "Nessuna risorsa da inviare.",
+    },
+  },
+  bookingPhotos: {
+    sheetTitle: { es: "Fotos de la reserva", it: "Foto della prenotazione" },
+    empty: {
+      es: "El cliente todavía no subió fotos.",
+      it: "Il cliente non ha ancora caricato foto.",
+    },
+    deleteConfirm: {
+      es: "¿Eliminar esta foto?",
+      it: "Eliminare questa foto?",
+    },
+    uploadPageTitle: { es: "Fotos de entrega", it: "Foto di consegna" },
+    uploadIntro: {
+      es: "Antes de irte, subí las fotos de la barca siguiendo esta guía.",
+      it: "Prima di andartene, carica le foto della barca seguendo questa guida.",
+    },
+    required: { es: "Obligatorio", it: "Obbligatorio" },
+    addPhotos: { es: "+ Agregar fotos", it: "+ Aggiungi foto" },
+    uploading: { es: "Subiendo...", it: "Caricamento..." },
+    photosCount: {
+      es: "{n} foto(s) subida(s)",
+      it: "{n} foto caricate",
+    },
+    allDone: {
+      es: "¡Listo! Ya podés cerrar esta página.",
+      it: "Fatto! Ora puoi chiudere questa pagina.",
+    },
+    invalidLink: {
+      es: "Este link no es válido o expiró.",
+      it: "Questo link non è valido o è scaduto.",
+    },
+    categories: {
+      elises: {
+        label: { es: "Hélices", it: "Eliche" },
+        instructions: {
+          es: "¡Importante! Sacá varias fotos de las hélices, bien de cerca.",
+          it: "Importante! Fai diverse foto delle eliche, ben da vicino.",
+        },
+      },
+      combustible: {
+        label: { es: "Reloj de combustible", it: "Indicatore carburante" },
+        instructions: {
+          es: "Foto del reloj/indicador de gasolina.",
+          it: "Foto dell'indicatore del carburante.",
+        },
+      },
+      exterior: {
+        label: { es: "Barca (vista general)", it: "Barca (vista generale)" },
+        instructions: {
+          es: "Fotos generales del estado de la barca.",
+          it: "Foto generali dello stato della barca.",
+        },
+      },
+      motor: {
+        label: { es: "Motor", it: "Motore" },
+        instructions: {
+          es: "Fotos del motor.",
+          it: "Foto del motore.",
+        },
+      },
+      debajo_motor: {
+        label: { es: "Debajo del motor", it: "Sotto il motore" },
+        instructions: {
+          es: "Foto de debajo del motor.",
+          it: "Foto sotto il motore.",
+        },
+      },
+      otros: {
+        label: { es: "Otras fotos", it: "Altre foto" },
+        instructions: {
+          es: "Cualquier otra foto que quieras agregar (golpes, daños, etc.).",
+          it: "Qualsiasi altra foto che vuoi aggiungere (urti, danni, ecc.).",
+        },
+      },
     },
   },
   errors: {

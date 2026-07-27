@@ -4,7 +4,9 @@ import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { es, it } from "date-fns/locale";
 import { useLocale } from "@/lib/i18n/LocaleContext";
+import { buildPhotoRequestMessage } from "@/lib/photoRequestMessage";
 import ResourceSendSheet from "@/components/resources/ResourceSendSheet";
+import BookingPhotosSheet from "@/components/bookings/BookingPhotosSheet";
 import type { Booking } from "@/types/booking";
 
 const DATE_FNS_LOCALES = { es, it };
@@ -27,9 +29,18 @@ export default function BookingListItem({
 }) {
   const { t, locale } = useLocale();
   const [showResources, setShowResources] = useState(false);
+  const [showPhotos, setShowPhotos] = useState(false);
   const channelLabel = booking.channel
     ? t.booking.channels[booking.channel]
     : null;
+
+  function handleRequestPhotos() {
+    if (!booking.client_phone) return;
+    const link = `${window.location.origin}/subir-fotos?token=${booking.photo_token}`;
+    const digits = booking.client_phone.replace(/\D/g, "");
+    const text = encodeURIComponent(buildPhotoRequestMessage(link));
+    window.open(`https://wa.me/${digits}?text=${text}`, "_blank");
+  }
 
   return (
     <div
@@ -117,14 +128,30 @@ export default function BookingListItem({
               💬 {t.booking.whatsapp}
             </a>
           </div>
-          <button
-            onClick={() => setShowResources(true)}
-            className="flex w-full items-center justify-center gap-1.5 rounded-lg bg-brand-light py-2 text-sm font-medium text-brand active:bg-brand-light/70"
-          >
-            📎 {t.booking.sendResource}
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setShowResources(true)}
+              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-brand-light py-2 text-sm font-medium text-brand active:bg-brand-light/70"
+            >
+              📎 {t.booking.sendResource}
+            </button>
+            <button
+              onClick={handleRequestPhotos}
+              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-brand-light py-2 text-sm font-medium text-brand active:bg-brand-light/70"
+            >
+              {t.booking.requestPhotos}
+            </button>
+          </div>
         </div>
       )}
+
+      <button
+        onClick={() => setShowPhotos(true)}
+        className="mt-2 flex w-full items-center justify-center gap-1.5 rounded-lg bg-zinc-100 py-2 text-sm font-medium text-zinc-700 active:bg-zinc-200"
+      >
+        {t.booking.viewPhotos}
+        {booking.photos_count > 0 ? ` (${booking.photos_count})` : ""}
+      </button>
 
       {booking.resource_sends.length > 0 && (
         <div className="mt-3 border-t border-zinc-100 pt-2">
@@ -151,6 +178,14 @@ export default function BookingListItem({
           phone={booking.client_phone}
           onClose={() => setShowResources(false)}
           onSent={onChanged}
+        />
+      )}
+
+      {showPhotos && (
+        <BookingPhotosSheet
+          bookingId={booking.id}
+          onClose={() => setShowPhotos(false)}
+          onChanged={onChanged}
         />
       )}
     </div>

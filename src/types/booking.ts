@@ -21,6 +21,9 @@ export interface Booking {
   id: number;
   boat_id: number;
   boat: Boat;
+  photo_token: string;
+  photos_uploaded_at: string | null;
+  photos_count: number;
   date: string;
   client_name: string | null;
   client_phone: string | null;

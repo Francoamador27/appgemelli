@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Gemelli Boat",
   description: "Gestione delle prenotazioni di imbarcazioni - Gemelli Boat",
   manifest: "/manifest.webmanifest",
+  other: {
+    google: "notranslate",
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -33,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="it" className="h-full">
+    <html lang="it" className="h-full" translate="no" suppressHydrationWarning>
       <body className="min-h-full flex flex-col bg-zinc-50 text-zinc-900 antialiased">
         <LocaleProvider>{children}</LocaleProvider>
       </body>
