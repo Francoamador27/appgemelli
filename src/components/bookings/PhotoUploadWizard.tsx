@@ -153,15 +153,13 @@ export default function PhotoUploadWizard() {
                 key={category}
                 className="rounded-xl border border-zinc-200 bg-white p-4"
               >
-                <div className="flex items-start justify-between gap-2">
-                  <Tri text={catT.label} className="font-medium text-zinc-900" />
-                  {required && (
-                    <span className="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700">
-                      {PUBLIC_UI.required.it} / {PUBLIC_UI.required.en} /{" "}
-                      {PUBLIC_UI.required.es}
-                    </span>
-                  )}
-                </div>
+                {required && (
+                  <span className="mb-1.5 inline-block rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700">
+                    {PUBLIC_UI.required.it} / {PUBLIC_UI.required.en} /{" "}
+                    {PUBLIC_UI.required.es}
+                  </span>
+                )}
+                <Tri text={catT.label} className="font-medium text-zinc-900" />
                 <Tri
                   text={catT.instructions}
                   className="mt-1 text-sm text-zinc-600"
