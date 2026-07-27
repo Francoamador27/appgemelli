@@ -32,5 +32,5 @@ export interface PublicBookingInfo {
   boat_name: string;
   date: string;
   required_categories: BookingPhotoCategory[];
-  photos_by_category: Partial<Record<BookingPhotoCategory, number>>;
+  photos_by_category: Partial<Record<BookingPhotoCategory, BookingPhoto[]>>;
 }
