@@ -47,6 +47,56 @@ export const PUBLIC_UI = {
     en: "This link is invalid or has expired.",
     es: "Este link no es válido o expiró.",
   },
+  notesTitle: {
+    it: "Note",
+    en: "Notes",
+    es: "Notas",
+  },
+  notesInstructions: {
+    it: "Hai notato qualcosa sulla barca? Scrivilo qui (opzionale).",
+    en: "Did you notice something about the boat? Write it here (optional).",
+    es: "¿Notaste algo en la barca? Escribilo acá (opcional).",
+  },
+  notePlaceholder: {
+    it: "Scrivi qui...",
+    en: "Write here...",
+    es: "Escribí acá...",
+  },
+  submitNote: {
+    it: "Invia nota",
+    en: "Submit note",
+    es: "Enviar nota",
+  },
+  sending: {
+    it: "Invio...",
+    en: "Sending...",
+    es: "Enviando...",
+  },
+  finish: {
+    it: "Finito",
+    en: "Finish",
+    es: "Finalizar",
+  },
+  finishedThanks: {
+    it: "Grazie! Inizia a goderti il viaggio con GemelliBoat.",
+    en: "Thank you! Start enjoying your trip with GemelliBoat.",
+    es: "¡Gracias! Empezá a disfrutar el viaje con GemelliBoat.",
+  },
+  tripMap: {
+    it: "Mappa del viaggio",
+    en: "Trip map",
+    es: "Mapa de viaje",
+  },
+  usageGuide: {
+    it: "Guida d'uso",
+    en: "Usage guide",
+    es: "Guía de uso",
+  },
+  usageGuideModalTitle: {
+    it: "Guide d'uso",
+    en: "Usage guides",
+    es: "Guías de uso",
+  },
 } satisfies Record<string, Trilingual>;
 
 export const PUBLIC_CATEGORIES: Record<

@@ -167,8 +167,39 @@ export const translations = {
       it: "Nessuna risorsa da inviare.",
     },
   },
+  usageGuide: {
+    menuTitle: { es: "Guía de uso", it: "Guida d'uso" },
+    add: { es: "+ Agregar", it: "+ Aggiungi" },
+    newTitle: { es: "Nueva guía", it: "Nuova guida" },
+    editTitle: { es: "Editar guía", it: "Modifica guida" },
+    titleLabel: { es: "Título", it: "Titolo" },
+    titlePlaceholder: {
+      es: "Ej: Guía en español",
+      it: "Es: Guida in italiano",
+    },
+    fileLabel: { es: "Archivo PDF", it: "File PDF" },
+    fileLabelOptional: {
+      es: "Archivo PDF (dejar vacío para mantener el actual)",
+      it: "File PDF (lascia vuoto per mantenere quello attuale)",
+    },
+    empty: { es: "No hay guías cargadas.", it: "Nessuna guida caricata." },
+    view: { es: "Ver", it: "Vedi" },
+    deleteConfirm: {
+      es: '¿Eliminar la guía "{title}"?',
+      it: 'Eliminare la guida "{title}"?',
+    },
+  },
+  tripMap: {
+    menuTitle: { es: "Mapa de viaje", it: "Mappa del viaggio" },
+    description: {
+      es: "Este link se muestra al cliente en la página de fotos de entrega.",
+      it: "Questo link viene mostrato al cliente nella pagina delle foto di consegna.",
+    },
+    urlLabel: { es: "Link de Google Maps", it: "Link di Google Maps" },
+    saved: { es: "Guardado", it: "Salvato" },
+  },
   bookingPhotos: {
-    sheetTitle: { es: "Fotos de la reserva", it: "Foto della prenotazione" },
+    sheetTitle: { es: "Fotos y notas de la reserva", it: "Foto e note della prenotazione" },
     empty: {
       es: "El cliente todavía no subió fotos.",
       it: "Il cliente non ha ancora caricato foto.",
@@ -177,69 +208,22 @@ export const translations = {
       es: "¿Eliminar esta foto?",
       it: "Eliminare questa foto?",
     },
-    uploadPageTitle: { es: "Fotos de entrega", it: "Foto di consegna" },
-    uploadIntro: {
-      es: "Antes de irte, subí las fotos de la barca siguiendo esta guía.",
-      it: "Prima di andartene, carica le foto della barca seguendo questa guida.",
+    notesSectionTitle: { es: "Notas", it: "Note" },
+    notesEmpty: {
+      es: "El cliente todavía no escribió notas.",
+      it: "Il cliente non ha ancora scritto note.",
     },
-    required: { es: "Obligatorio", it: "Obbligatorio" },
-    addPhotos: { es: "+ Agregar fotos", it: "+ Aggiungi foto" },
-    uploading: { es: "Subiendo...", it: "Caricamento..." },
-    photosCount: {
-      es: "{n} foto(s) subida(s)",
-      it: "{n} foto caricate",
-    },
-    allDone: {
-      es: "¡Listo! Ya podés cerrar esta página.",
-      it: "Fatto! Ora puoi chiudere questa pagina.",
-    },
-    invalidLink: {
-      es: "Este link no es válido o expiró.",
-      it: "Questo link non è valido o è scaduto.",
+    noteDeleteConfirm: {
+      es: "¿Eliminar esta nota?",
+      it: "Eliminare questa nota?",
     },
     categories: {
-      elises: {
-        label: { es: "Hélices", it: "Eliche" },
-        instructions: {
-          es: "¡Importante! Sacá varias fotos de las hélices, bien de cerca.",
-          it: "Importante! Fai diverse foto delle eliche, ben da vicino.",
-        },
-      },
-      combustible: {
-        label: { es: "Reloj de combustible", it: "Indicatore carburante" },
-        instructions: {
-          es: "Foto del reloj/indicador de gasolina.",
-          it: "Foto dell'indicatore del carburante.",
-        },
-      },
-      exterior: {
-        label: { es: "Barca (vista general)", it: "Barca (vista generale)" },
-        instructions: {
-          es: "Fotos generales del estado de la barca.",
-          it: "Foto generali dello stato della barca.",
-        },
-      },
-      motor: {
-        label: { es: "Motor", it: "Motore" },
-        instructions: {
-          es: "Fotos del motor.",
-          it: "Foto del motore.",
-        },
-      },
-      debajo_motor: {
-        label: { es: "Debajo del motor", it: "Sotto il motore" },
-        instructions: {
-          es: "Foto de debajo del motor.",
-          it: "Foto sotto il motore.",
-        },
-      },
-      otros: {
-        label: { es: "Otras fotos", it: "Altre foto" },
-        instructions: {
-          es: "Cualquier otra foto que quieras agregar (golpes, daños, etc.).",
-          it: "Qualsiasi altra foto che vuoi aggiungere (urti, danni, ecc.).",
-        },
-      },
+      elises: { es: "Hélices", it: "Eliche" },
+      combustible: { es: "Reloj de combustible", it: "Indicatore carburante" },
+      exterior: { es: "Barca (vista general)", it: "Barca (vista generale)" },
+      motor: { es: "Motor", it: "Motore" },
+      debajo_motor: { es: "Debajo del motor", it: "Sotto il motore" },
+      otros: { es: "Otras fotos", it: "Altre foto" },
     },
   },
   errors: {

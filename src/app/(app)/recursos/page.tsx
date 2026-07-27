@@ -21,10 +21,15 @@ import Button from "@/components/ui/Button";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import ResourceForm from "@/components/resources/ResourceForm";
 import ResourceListItem from "@/components/resources/ResourceListItem";
+import UsageGuideSection from "@/components/resources/UsageGuideSection";
+import TripMapForm from "@/components/resources/TripMapForm";
 import type { Resource } from "@/types/resource";
+
+type Tab = "resources" | "guides" | "map";
 
 export default function RecursosPage() {
   const { t } = useLocale();
+  const [tab, setTab] = useState<Tab>("resources");
   const [resources, setResources] = useState<Resource[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -108,65 +113,95 @@ export default function RecursosPage() {
     }
   }
 
+  const tabs: { value: Tab; label: string }[] = [
+    { value: "resources", label: t.resource.menuTitle },
+    { value: "guides", label: t.usageGuide.menuTitle },
+    { value: "map", label: t.tripMap.menuTitle },
+  ];
+
   return (
     <div className="px-4 py-4">
-      <div className="mb-4 flex items-center justify-between">
-        <h1 className="text-lg font-semibold text-zinc-900">
-          {t.resource.menuTitle} ({resources.length})
-        </h1>
-        <Button onClick={openCreate}>{t.resource.add}</Button>
+      <div className="mb-4 inline-flex rounded-lg border border-zinc-200 bg-white p-0.5">
+        {tabs.map((tabItem) => (
+          <button
+            key={tabItem.value}
+            onClick={() => setTab(tabItem.value)}
+            className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+              tab === tabItem.value
+                ? "bg-brand text-white"
+                : "text-zinc-500 active:bg-zinc-100"
+            }`}
+          >
+            {tabItem.label}
+          </button>
+        ))}
       </div>
 
-      {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
+      {tab === "resources" && (
+        <>
+          <div className="mb-4 flex items-center justify-between">
+            <h1 className="text-lg font-semibold text-zinc-900">
+              {t.resource.menuTitle} ({resources.length})
+            </h1>
+            <Button onClick={openCreate}>{t.resource.add}</Button>
+          </div>
 
-      {loading ? (
-        <p className="text-sm text-zinc-500">{t.common.loading}</p>
-      ) : resources.length === 0 ? (
-        <p className="py-6 text-center text-sm text-zinc-400">
-          {t.resource.empty}
-        </p>
-      ) : (
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
-        >
-          <SortableContext
-            items={resources.map((r) => r.id)}
-            strategy={verticalListSortingStrategy}
-          >
-            <div className="flex flex-col gap-2">
-              {resources.map((resource) => (
-                <ResourceListItem
-                  key={resource.id}
-                  resource={resource}
-                  onEdit={() => openEdit(resource)}
-                  onDelete={() => setDeletingResource(resource)}
-                />
-              ))}
-            </div>
-          </SortableContext>
-        </DndContext>
-      )}
+          {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
 
-      {showForm && (
-        <ResourceForm
-          resource={editingResource ?? undefined}
-          onClose={() => setShowForm(false)}
-          onSaved={handleSaved}
-        />
-      )}
-
-      {deletingResource && (
-        <ConfirmDialog
-          message={t.resource.deleteConfirm.replace(
-            "{name}",
-            deletingResource.title_it,
+          {loading ? (
+            <p className="text-sm text-zinc-500">{t.common.loading}</p>
+          ) : resources.length === 0 ? (
+            <p className="py-6 text-center text-sm text-zinc-400">
+              {t.resource.empty}
+            </p>
+          ) : (
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEnd}
+            >
+              <SortableContext
+                items={resources.map((r) => r.id)}
+                strategy={verticalListSortingStrategy}
+              >
+                <div className="flex flex-col gap-2">
+                  {resources.map((resource) => (
+                    <ResourceListItem
+                      key={resource.id}
+                      resource={resource}
+                      onEdit={() => openEdit(resource)}
+                      onDelete={() => setDeletingResource(resource)}
+                    />
+                  ))}
+                </div>
+              </SortableContext>
+            </DndContext>
           )}
-          onConfirm={handleDelete}
-          onCancel={() => setDeletingResource(null)}
-        />
+
+          {showForm && (
+            <ResourceForm
+              resource={editingResource ?? undefined}
+              onClose={() => setShowForm(false)}
+              onSaved={handleSaved}
+            />
+          )}
+
+          {deletingResource && (
+            <ConfirmDialog
+              message={t.resource.deleteConfirm.replace(
+                "{name}",
+                deletingResource.title_it,
+              )}
+              onConfirm={handleDelete}
+              onCancel={() => setDeletingResource(null)}
+            />
+          )}
+        </>
       )}
+
+      {tab === "guides" && <UsageGuideSection />}
+
+      {tab === "map" && <TripMapForm />}
     </div>
   );
 }

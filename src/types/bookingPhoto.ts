@@ -1,3 +1,5 @@
+import type { BookingNote } from "./bookingNote";
+
 export type BookingPhotoCategory =
   | "elises"
   | "combustible"
@@ -33,4 +35,5 @@ export interface PublicBookingInfo {
   date: string;
   required_categories: BookingPhotoCategory[];
   photos_by_category: Partial<Record<BookingPhotoCategory, BookingPhoto[]>>;
+  notes: BookingNote[];
 }
