@@ -157,6 +157,7 @@ export const translations = {
     empty: { es: "No hay recursos cargados.", it: "Nessuna risorsa caricata." },
     reorderHandle: { es: "Arrastrar para reordenar", it: "Trascina per riordinare" },
     shareWhatsapp: { es: "Compartir por WhatsApp", it: "Condividi su WhatsApp" },
+    viewFullscreen: { es: "Ver en pantalla completa", it: "Visualizza a schermo intero" },
     deleteConfirm: {
       es: '¿Eliminar el recurso "{name}"?',
       it: 'Eliminare la risorsa "{name}"?',
@@ -165,6 +166,10 @@ export const translations = {
     sendEmpty: {
       es: "No hay recursos para enviar.",
       it: "Nessuna risorsa da inviare.",
+    },
+    sendMapEmpty: {
+      es: "No hay un link de mapa cargado.",
+      it: "Nessun link della mappa caricato.",
     },
   },
   usageGuide: {

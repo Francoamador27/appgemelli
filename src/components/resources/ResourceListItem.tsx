@@ -1,10 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useLocale } from "@/lib/i18n/LocaleContext";
 import { toWaShareLink } from "@/lib/resourceMessage";
 import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
+import ImageLightbox from "@/components/ui/ImageLightbox";
 import type { Resource } from "@/types/resource";
 
 const TYPE_ICON: Record<Resource["type"], string> = {
@@ -23,6 +25,7 @@ export default function ResourceListItem({
   onDelete: () => void;
 }) {
   const { t } = useLocale();
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id: resource.id });
 
@@ -70,6 +73,15 @@ export default function ResourceListItem({
         >
           <WhatsAppIcon className="h-5 w-5" />
         </a>
+        {resource.type === "image" && resource.file_url && (
+          <button
+            onClick={() => setIsPreviewOpen(true)}
+            className="rounded-lg p-2 text-zinc-500 active:bg-zinc-100"
+            aria-label={t.resource.viewFullscreen}
+          >
+            🔍
+          </button>
+        )}
         <button
           onClick={onEdit}
           className="rounded-lg p-2 text-zinc-500 active:bg-zinc-100"
@@ -85,6 +97,14 @@ export default function ResourceListItem({
           🗑️
         </button>
       </div>
+
+      {isPreviewOpen && resource.file_url && (
+        <ImageLightbox
+          src={resource.file_url}
+          alt={resource.title_it}
+          onClose={() => setIsPreviewOpen(false)}
+        />
+      )}
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import type { Resource } from "@/types/resource";
+import type { UsageGuide } from "@/types/usageGuide";
 
 const SEPARATOR = "\n\n---\n\n";
 
@@ -22,4 +23,12 @@ export function buildResourceMessage(resource: Resource): string {
 
 export function toWaShareLink(resource: Resource): string {
   return `https://wa.me/?text=${encodeURIComponent(buildResourceMessage(resource))}`;
+}
+
+export function buildUsageGuideMessage(guide: UsageGuide): string {
+  return [`*${guide.title}*`, guide.url].join(SEPARATOR);
+}
+
+export function buildTripMapMessage(label: string, url: string): string {
+  return [`*${label}*`, url].join(SEPARATOR);
 }
